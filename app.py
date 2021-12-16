@@ -101,7 +101,7 @@ def pro_family_sales():
 
 
 
-ops=['Genere','platform','publisher','region']
+ops=['Genre','platform','publisher','region']
 choice=st.selectbox('Data Analyse by',ops)
 if choice==ops[0]:
     st.subheader('Most popular game genre')
@@ -275,6 +275,8 @@ if choice==ops[3]:
     st.markdown('conclusion::')
     st.text('Looks like NA has the most sales.')
 
+st.subheader('Comparision of Global sales for ProductFamily in two time spans')
+
 before2011=data[(data["Year"]>=2005) & (data["Year"]<2011)].groupby("ProductFamily")['Global_Sales'].sum().sort_values(ascending = False).reset_index()
 after2011=data[(data["Year"]>=2011) & (data["Year"]<2017)].groupby("ProductFamily")['Global_Sales'].sum().sort_values(ascending = False).reset_index()
 combined=pd.merge(before2011, after2011, on="ProductFamily")
@@ -294,7 +296,10 @@ def global_span():
     plt.legend(fontsize=20)
 globalsales=global_span()
 st.pyplot(globalsales)
-
+st.markdown('Conclusion::')
+st.text('''1.Nintendo DS had made huge success in sales during the 2005 to 2010 time span.
+           2.Playstation overtook the top selling spot during the 2011-2016.
+           3.The sales in Nintendo dramatically decrease during the 2011-2016 time span.''')
 
 
 df1=data.rename(index=str, columns={"NA_Sales": "North America", "EU_Sales": "Europe",
@@ -302,6 +307,7 @@ df1=data.rename(index=str, columns={"NA_Sales": "North America", "EU_Sales": "Eu
 df1=df1.loc[:, 'Name': 'Global_Sales'].sort_values(by="Global_Sales", ascending=True).tail(10)
 
 #sales since 1980
+st.subheader('Sales by year in Us Doller')
 def sales_since():
     SaleByYear=data.groupby('Year')['NA_Sales', 'EU_Sales', 'JP_Sales', 'Other_Sales',
                                     'Global_Sales'].sum().reset_index()
