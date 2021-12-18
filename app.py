@@ -122,8 +122,11 @@ if choice==ops[0]:
         
     st.pyplot(fig)
     st.markdown('Conclusion::')
-    st.text('''1.Action games were one of the most popular genres.
-    2.Action genre has over 3000 games across multiple platforms''')
+    st.markdown('''
+    1. Action games were one of the most popular genres.
+
+    2. Action genre has over 3000 games across multiple platforms
+    ''')
 
     
     game_genres=['action','sport','misc','racing']
